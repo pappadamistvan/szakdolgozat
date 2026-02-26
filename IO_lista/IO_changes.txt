@@ -1,0 +1,4 @@
+ * I0.7 - Raktár vészstop
+ - I6.0,1 - Puffer rendszer alsó pálya vészstop
+ - I6.2,3 - Puffer rendszer középső pálya vészstop
+ - I6.4,5 - Puffer rendszer felső pálya vészstop

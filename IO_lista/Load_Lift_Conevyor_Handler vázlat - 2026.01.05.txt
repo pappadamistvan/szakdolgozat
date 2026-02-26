@@ -1,0 +1,50 @@
+Load_Lift_Handler:
+ - Bekérés
+ - Leadás
+
+1. Bekérés feltételei:
+	- Ha még üres
+	- El van indítva az Entry pálya
+
+  Leállás feltétele:
+	- Végére ért a pályának
+
+2. Leadás feltételei:
+	- Ha nem üres, tehát az utolsó szenzor látja
+	- Nem mozog a pálya
+	(Ez a kettő együtt, hogy be van töltve)
+
+	- Azon a szinten van, ahova mennie kell
+
+  Leállás feltételei:
+	- Átért a szenzoron, most már lement a liftnek a pályájáról
+
+Szükséges elemek az elindításhoz:
+ - I_Entry_Conveyor_Started --> Ezt a Conveyor_Handler-ből kell
+ - stat_Pallett_Ready --> Be van töltve a paletta
+ - stat_At_Target_Level --> A kívánt szinten van
+
+Szükséges elemek a leállításhoz:
+ - SR nélkül nem kell viszont...
+	- Bekéréshez ha elérte a lift utolsó szenzorát vagy rendszerleállás
+	- Leadáshoz pedig ha már nem érzékeli a lift utolsó szenzora
+
+
+
+Az egyik reset lehetne egy trigger arra, amikor elérte a szenzort, hogy ne adjon folyamatosan jelet. És akkor ez resetelné a stat_Motor_Running-ot, és ez csak egyszer
+
+Bekérés (stat_Ready_To_Take):
+ Set:
+ - El van indítva az Entry pálya
+ - Üres (nem érzékel a szenzor)
+ Reset:
+ - Szenzor nem érzékel --> N_TRIG
+
+Leadás (stat_Ready_To_Load):
+ Set:
+ - A megfelelő szinten van
+ - Nem mozog a lift
+ - Érzékel a szenzor
+ Reset:
+ - Érzékel a szenzor --> N_TRIG
+
